@@ -1,0 +1,1200 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="9/3/2019 1:13:23 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="LUC-DATA-REPORT"
+  DTS:CreatorName="MADRID\sebastian.bravo"
+  DTS:DTSID="{58194558-2D4E-4AF1-8194-84E213AF72BE}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="14.0.3002.113"
+  DTS:LocaleID="3082"
+  DTS:ObjectName="EvolutionDBToReporting"
+  DTS:PackageType="5"
+  DTS:VersionBuild="4"
+  DTS:VersionGUID="{73DF35BF-33CB-4390-BAFC-E57D8D3443AF}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[192.168.2.16.GroveETL.etlautomation EVOLUTIONB]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{CA1B4FFC-16EE-4843-AA21-9F9129B85EB6}"
+      DTS:ObjectName="192.168.2.16.GroveETL.etlautomation EVOLUTIONB">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=192.168.2.16;User ID=etlautomation;Initial Catalog=EVOLUTIONB;Provider=SQLNCLI11.1;Persist Security Info=True;Auto Translate=False;">
+          <DTS:Password
+            DTS:Name="Password"
+            Sensitive="1"
+            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAtjTnCOkIsUqsmgvw8vJg0gAAAAAIAAAARABUAFMAAAADZgAAwAAAABAAAADnzgeVlBq30FP899Xdzk0OAAAAAASAAACgAAAAEAAAACRCvw7hJK5cyFeY3NfOgNoYAAAA/2X6X1BPC39Kyc8LmlVb6qHYom0r+GfWFAAAAGc0I6uWA2XKhoXaz99c7+9NSo2Y</DTS:Password>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[192.168.2.4.EVOLUTIONDB.etlautomation EVOLUTIONDB]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{3A193971-6DC3-4315-8AB5-B9A6A5A8BB72}"
+      DTS:ObjectName="192.168.2.4.EVOLUTIONDB.etlautomation EVOLUTIONDB">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=192.168.2.4;User ID=etlautomation;Initial Catalog=EVOLUTIONDB;Provider=SQLNCLI11.1;Persist Security Info=True;Auto Translate=False;">
+          <DTS:Password
+            DTS:Name="Password"
+            Sensitive="1"
+            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAtjTnCOkIsUqsmgvw8vJg0gAAAAAIAAAARABUAFMAAAADZgAAwAAAABAAAAD9k2OVybnPR5HdiofL9Ys+AAAAAASAAACgAAAAEAAAAK5Tqio98LN42EFGqRmbGpcYAAAA6Iwlne0HasnDzNxFQacXHklC8yVvRZ+vFAAAAHxNIoUYNRXllwZyqK78EmgZF9Hj</DTS:Password>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Contenedor de secuencias"
+      DTS:CreationName="STOCK:SEQUENCE"
+      DTS:Description="Contenedor de secuencias"
+      DTS:DTSID="{C333D78B-D281-4C0C-910E-25A8E4CA1987}"
+      DTS:ExecutableType="STOCK:SEQUENCE"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Contenedor de secuencias">
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\Contenedor de secuencias\TBGrabacion"
+          DTS:CreationName="Microsoft.Pipeline"
+          DTS:Description="Tarea Flujo de datos"
+          DTS:DTSID="{9440C841-CCAD-4880-84B9-DDAAEC2E8DC7}"
+          DTS:ExecutableType="Microsoft.Pipeline"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="TBGrabacion"
+          DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <pipeline
+              version="1">
+              <components>
+                <component
+                  refId="Package\Contenedor de secuencias\TBGrabacion\Búsqueda"
+                  componentClassID="Microsoft.Lookup"
+                  contactInfo="Búsqueda;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos los derechos reservados; http://www.microsoft.com/sql/support;6"
+                  description="Combina columnas adicionales con el flujo de datos mediante la búsqueda de valores en una tabla. Por ejemplo, se combina la columna 'id. de empleado' con la tabla de empleados para obtener la 'fecha de contratación' y 'el nombre de empleado'. Se recomienda esta transformación cuando hay suficiente espacio en memoria para la tabla de búsqueda."
+                  name="Búsqueda"
+                  usesDispositions="true"
+                  version="6">
+                  <properties>
+                    <property
+                      dataType="System.String"
+                      description="Especifica la instrucción SQL que genera la tabla de búsqueda."
+                      expressionType="Notify"
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT [idGrabacion]
+      ,[idGrabador]
+      ,[idContacto]
+      ,[idTransaccion]
+      ,[tInicio]
+      ,[tFinal]
+      ,[sExtension]
+      ,[sFicheroVoz]
+      ,[sMarca1]
+      ,[sMarca2]
+      ,[sMarca3]
+      ,[sMarca4]
+      ,[sMarca5]
+      ,[sMarca6]
+      ,[sMarca7]
+      ,[sMarca8]
+  FROM tbGrabacion where [tInicio]  &gt; DATEADD(Month, -1, getdate())</property>
+                    <property
+                      dataType="System.String"
+                      description="Especifica una instrucción SQL que usa parámetros para generar la tabla de búsqueda."
+                      expressionType="Notify"
+                      name="SqlCommandParam"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from (SELECT [idGrabacion]
+      ,[idGrabador]
+      ,[idContacto]
+      ,[idTransaccion]
+      ,[tInicio]
+      ,[tFinal]
+      ,[sExtension]
+      ,[sFicheroVoz]
+      ,[sMarca1]
+      ,[sMarca2]
+      ,[sMarca3]
+      ,[sMarca4]
+      ,[sMarca5]
+      ,[sMarca6]
+      ,[sMarca7]
+      ,[sMarca8]
+  FROM tbGrabacion where [tInicio]  &gt; DATEADD(Month, -1, getdate())) [refTable]
+where [refTable].[idGrabacion] = ?</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Especifica el tipo de conexión utilizado para tener acceso al conjunto de datos de referencia."
+                      name="ConnectionType"
+                      typeConverter="LookupConnectionType">0</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Especifica el tipo de caché de la tabla de búsqueda."
+                      name="CacheType"
+                      typeConverter="CacheType">0</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Especifica cómo la transformación de búsquedas trata las filas sin entradas coincidentes en el conjunto de datos de referencia."
+                      name="NoMatchBehavior"
+                      typeConverter="LookupNoMatchBehavior">1</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Especifica el porcentaje de la caché asignado a las filas sin entradas coincidentes en el conjunto de datos de referencia."
+                      name="NoMatchCachePercentage">0</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Uso de memoria máximo para la caché de referencia en una plataforma de 32 bits."
+                      name="MaxMemoryUsage">25</property>
+                    <property
+                      dataType="System.Int64"
+                      description="Uso de memoria máximo para la caché de referencia en una plataforma de 64 bits."
+                      name="MaxMemoryUsage64">25</property>
+                    <property
+                      dataType="System.String"
+                      description="Indica si se debe hacer referencia a metadatos en formato XML."
+                      name="ReferenceMetadataXml">&lt;referenceMetadata&gt;&lt;referenceColumns&gt;&lt;referenceColumn name="idGrabacion" dataType="DT_NUMERIC" length="0" precision="10" scale="0" codePage="0"/&gt;&lt;referenceColumn name="idGrabador" dataType="DT_NUMERIC" length="0" precision="10" scale="0" codePage="0"/&gt;&lt;referenceColumn name="idContacto" dataType="DT_NUMERIC" length="0" precision="10" scale="0" codePage="0"/&gt;&lt;referenceColumn name="idTransaccion" dataType="DT_NUMERIC" length="0" precision="10" scale="0" codePage="0"/&gt;&lt;referenceColumn name="tInicio" dataType="DT_DBTIMESTAMP" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="tFinal" dataType="DT_DBTIMESTAMP" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="sExtension" dataType="DT_STR" length="20" precision="0" scale="0" codePage="1252"/&gt;&lt;referenceColumn name="sFicheroVoz" dataType="DT_STR" length="256" precision="0" scale="0" codePage="1252"/&gt;&lt;referenceColumn name="sMarca1" dataType="DT_STR" length="64" precision="0" scale="0" codePage="1252"/&gt;&lt;referenceColumn name="sMarca2" dataType="DT_STR" length="64" precision="0" scale="0" codePage="1252"/&gt;&lt;referenceColumn name="sMarca3" dataType="DT_STR" length="64" precision="0" scale="0" codePage="1252"/&gt;&lt;referenceColumn name="sMarca4" dataType="DT_STR" length="64" precision="0" scale="0" codePage="1252"/&gt;&lt;referenceColumn name="sMarca5" dataType="DT_STR" length="64" precision="0" scale="0" codePage="1252"/&gt;&lt;referenceColumn name="sMarca6" dataType="DT_STR" length="64" precision="0" scale="0" codePage="1252"/&gt;&lt;referenceColumn name="sMarca7" dataType="DT_STR" length="64" precision="0" scale="0" codePage="1252"/&gt;&lt;referenceColumn name="sMarca8" dataType="DT_STR" length="64" precision="0" scale="0" codePage="1252"/&gt;&lt;/referenceColumns&gt;&lt;/referenceMetadata&gt;</property>
+                    <property
+                      containsID="true"
+                      dataType="System.String"
+                      description="Especifica la lista de identificadores de linaje que están asignados a los parámetros que usa la instrucción SQL de la propiedad SQLCommand. Las entradas de la lista están separadas por puntos y comas."
+                      name="ParameterMap">#{Package\Contenedor de secuencias\TBGrabacion\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[idGrabacion]};</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Especifica la página de códigos de columna para utilizar cuando la información de página de códigos no está disponible en el origen de datos."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Determina si las claves duplicadas de los datos de referencia se deben tratar como errores cuando se usa el modo de caché."
+                      name="TreatDuplicateKeysAsError">false</property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Contenedor de secuencias\TBGrabacion\Búsqueda.Connections[OleDbConnection]"
+                      connectionManagerID="Package.ConnectionManagers[192.168.2.16.GroveETL.etlautomation EVOLUTIONB]"
+                      connectionManagerRefId="Package.ConnectionManagers[192.168.2.16.GroveETL.etlautomation EVOLUTIONB]"
+                      description="Administrador de conexiones utilizado para obtener acceso a los datos de búsqueda."
+                      name="OleDbConnection" />
+                  </connections>
+                  <inputs>
+                    <input
+                      refId="Package\Contenedor de secuencias\TBGrabacion\Búsqueda.Inputs[Entrada de búsqueda]"
+                      name="Entrada de búsqueda">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Contenedor de secuencias\TBGrabacion\Búsqueda.Inputs[Entrada de búsqueda].Columns[idGrabacion]"
+                          cachedDataType="numeric"
+                          cachedName="idGrabacion"
+                          cachedPrecision="10"
+                          lineageId="Package\Contenedor de secuencias\TBGrabacion\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[idGrabacion]">
+                          <properties>
+                            <property
+                              dataType="System.String"
+                              description="Especifica la columna de la tabla de referencia con la que se combina una columna."
+                              name="JoinToReferenceColumn">idGrabacion</property>
+                            <property
+                              dataType="System.Null"
+                              description="Especifica la columna de la tabla de referencia de la que se copia una columna."
+                              name="CopyFromReferenceColumn" />
+                          </properties>
+                        </inputColumn>
+                      </inputColumns>
+                      <externalMetadataColumns />
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Contenedor de secuencias\TBGrabacion\Búsqueda.Outputs[Salida de entradas coincidentes de búsqueda]"
+                      errorOrTruncationOperation="Búsqueda"
+                      exclusionGroup="1"
+                      name="Salida de entradas coincidentes de búsqueda"
+                      synchronousInputId="Package\Contenedor de secuencias\TBGrabacion\Búsqueda.Inputs[Entrada de búsqueda]">
+                      <externalMetadataColumns />
+                    </output>
+                    <output
+                      refId="Package\Contenedor de secuencias\TBGrabacion\Búsqueda.Outputs[Salida de entradas no coincidentes de búsqueda]"
+                      description="Salida de búsqueda que trata las filas sin entradas coincidentes en el conjunto de datos de referencia. Utilice esta salida cuando la propiedad NoMatchBehavior esté establecida en 'Enviar las filas sin entradas coincidentes a la salida de entradas no coincidentes'."
+                      exclusionGroup="1"
+                      name="Salida de entradas no coincidentes de búsqueda"
+                      synchronousInputId="Package\Contenedor de secuencias\TBGrabacion\Búsqueda.Inputs[Entrada de búsqueda]">
+                      <externalMetadataColumns />
+                    </output>
+                    <output
+                      refId="Package\Contenedor de secuencias\TBGrabacion\Búsqueda.Outputs[Salida de error de búsqueda]"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="Salida de error de búsqueda"
+                      synchronousInputId="Package\Contenedor de secuencias\TBGrabacion\Búsqueda.Inputs[Entrada de búsqueda]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Contenedor de secuencias\TBGrabacion\Búsqueda.Outputs[Salida de error de búsqueda].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Contenedor de secuencias\TBGrabacion\Búsqueda.Outputs[Salida de error de búsqueda].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Contenedor de secuencias\TBGrabacion\Búsqueda.Outputs[Salida de error de búsqueda].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Contenedor de secuencias\TBGrabacion\Búsqueda.Outputs[Salida de error de búsqueda].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Contenedor de secuencias\TBGrabacion\Destino de OLE DB"
+                  componentClassID="Microsoft.OLEDBDestination"
+                  contactInfo="Destino de OLE DB;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos los derechos reservados; http://www.microsoft.com/sql/support;4"
+                  description="Destino de OLE DB"
+                  name="Destino de OLE DB"
+                  usesDispositions="true"
+                  version="4">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="Número de segundos antes de que se agote el tiempo de espera de un comando. Un valor de 0 indica un tiempo de espera infinito."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Especifica el nombre del objeto de base de datos usado para abrir un conjunto de filas."
+                      name="OpenRowset">[dbo].[tbGrabacion]</property>
+                    <property
+                      dataType="System.String"
+                      description="Especifica la variable que contiene el nombre del objeto de base de datos usado para abrir un conjunto de filas."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="Comando SQL para ejecutar."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Especifica la página de códigos de columna para utilizar cuando la información de página de códigos no está disponible en el origen de datos."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Fuerza el uso del valor de la propiedad DefaultCodePage al describir datos de caracteres."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Especifica el modo utilizado para obtener acceso a la base de datos."
+                      name="AccessMode"
+                      typeConverter="AccessMode">3</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indica si los valores proporcionados para columnas de identidad se van a copiar al destino. Si es False, los valores de las columnas de identidad se generan automáticamente en el destino. Solo se aplica si está activada la carga rápida."
+                      name="FastLoadKeepIdentity">false</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indica si las columnas que contienen NULL tendrán NULL insertado en el destino. Si es False, las columnas que contienen NULL tendrán sus valores predeterminados insertados en el destino. Solo se aplica si está activada la carga rápida."
+                      name="FastLoadKeepNulls">false</property>
+                    <property
+                      dataType="System.String"
+                      description="Especifica opciones para usar con la carga rápida. Solo se aplica si está activada la carga rápida."
+                      name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS,ROWS_PER_BATCH = 10000</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Especifica cuándo se emiten confirmaciones durante la inserción de datos. El valor 0 especifica que se emitirá una confirmación al final de la inserción de datos. Solo se aplica si está activada la carga rápida."
+                      name="FastLoadMaxInsertCommitSize">2147483647</property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Contenedor de secuencias\TBGrabacion\Destino de OLE DB.Connections[OleDbConnection]"
+                      connectionManagerID="Package.ConnectionManagers[192.168.2.16.GroveETL.etlautomation EVOLUTIONB]"
+                      connectionManagerRefId="Package.ConnectionManagers[192.168.2.16.GroveETL.etlautomation EVOLUTIONB]"
+                      description="La conexión de tiempo de ejecución OLE DB usada para obtener acceso a la base de datos."
+                      name="OleDbConnection" />
+                  </connections>
+                  <inputs>
+                    <input
+                      refId="Package\Contenedor de secuencias\TBGrabacion\Destino de OLE DB.Inputs[Entrada de destino de OLE DB]"
+                      errorOrTruncationOperation="Insertar"
+                      errorRowDisposition="FailComponent"
+                      hasSideEffects="true"
+                      name="Entrada de destino de OLE DB">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Contenedor de secuencias\TBGrabacion\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].Columns[idGrabacion]"
+                          cachedDataType="numeric"
+                          cachedName="idGrabacion"
+                          cachedPrecision="10"
+                          externalMetadataColumnId="Package\Contenedor de secuencias\TBGrabacion\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].ExternalColumns[idGrabacion]"
+                          lineageId="Package\Contenedor de secuencias\TBGrabacion\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[idGrabacion]" />
+                        <inputColumn
+                          refId="Package\Contenedor de secuencias\TBGrabacion\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].Columns[idGrabador]"
+                          cachedDataType="numeric"
+                          cachedName="idGrabador"
+                          cachedPrecision="10"
+                          externalMetadataColumnId="Package\Contenedor de secuencias\TBGrabacion\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].ExternalColumns[idGrabador]"
+                          lineageId="Package\Contenedor de secuencias\TBGrabacion\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[idGrabador]" />
+                        <inputColumn
+                          refId="Package\Contenedor de secuencias\TBGrabacion\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].Columns[idContacto]"
+                          cachedDataType="numeric"
+                          cachedName="idContacto"
+                          cachedPrecision="10"
+                          externalMetadataColumnId="Package\Contenedor de secuencias\TBGrabacion\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].ExternalColumns[idContacto]"
+                          lineageId="Package\Contenedor de secuencias\TBGrabacion\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[idContacto]" />
+                        <inputColumn
+                          refId="Package\Contenedor de secuencias\TBGrabacion\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].Columns[idTransaccion]"
+                          cachedDataType="numeric"
+                          cachedName="idTransaccion"
+                          cachedPrecision="10"
+                          externalMetadataColumnId="Package\Contenedor de secuencias\TBGrabacion\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].ExternalColumns[idTransaccion]"
+                          lineageId="Package\Contenedor de secuencias\TBGrabacion\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[idTransaccion]" />
+                        <inputColumn
+                          refId="Package\Contenedor de secuencias\TBGrabacion\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].Columns[tInicio]"
+                          cachedDataType="dbTimeStamp"
+                          cachedName="tInicio"
+                          externalMetadataColumnId="Package\Contenedor de secuencias\TBGrabacion\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].ExternalColumns[tInicio]"
+                          lineageId="Package\Contenedor de secuencias\TBGrabacion\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[tInicio]" />
+                        <inputColumn
+                          refId="Package\Contenedor de secuencias\TBGrabacion\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].Columns[tFinal]"
+                          cachedDataType="dbTimeStamp"
+                          cachedName="tFinal"
+                          externalMetadataColumnId="Package\Contenedor de secuencias\TBGrabacion\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].ExternalColumns[tFinal]"
+                          lineageId="Package\Contenedor de secuencias\TBGrabacion\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[tFinal]" />
+                        <inputColumn
+                          refId="Package\Contenedor de secuencias\TBGrabacion\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].Columns[sExtension]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="20"
+                          cachedName="sExtension"
+                          externalMetadataColumnId="Package\Contenedor de secuencias\TBGrabacion\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].ExternalColumns[sExtension]"
+                          lineageId="Package\Contenedor de secuencias\TBGrabacion\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[sExtension]" />
+                        <inputColumn
+                          refId="Package\Contenedor de secuencias\TBGrabacion\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].Columns[sFicheroVoz]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="256"
+                          cachedName="sFicheroVoz"
+                          externalMetadataColumnId="Package\Contenedor de secuencias\TBGrabacion\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].ExternalColumns[sFicheroVoz]"
+                          lineageId="Package\Contenedor de secuencias\TBGrabacion\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[sFicheroVoz]" />
+                        <inputColumn
+                          refId="Package\Contenedor de secuencias\TBGrabacion\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].Columns[sMarca1]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="64"
+                          cachedName="sMarca1"
+                          externalMetadataColumnId="Package\Contenedor de secuencias\TBGrabacion\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].ExternalColumns[sMarca1]"
+                          lineageId="Package\Contenedor de secuencias\TBGrabacion\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[sMarca1]" />
+                        <inputColumn
+                          refId="Package\Contenedor de secuencias\TBGrabacion\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].Columns[sMarca2]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="64"
+                          cachedName="sMarca2"
+                          externalMetadataColumnId="Package\Contenedor de secuencias\TBGrabacion\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].ExternalColumns[sMarca2]"
+                          lineageId="Package\Contenedor de secuencias\TBGrabacion\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[sMarca2]" />
+                        <inputColumn
+                          refId="Package\Contenedor de secuencias\TBGrabacion\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].Columns[sMarca3]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="64"
+                          cachedName="sMarca3"
+                          externalMetadataColumnId="Package\Contenedor de secuencias\TBGrabacion\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].ExternalColumns[sMarca3]"
+                          lineageId="Package\Contenedor de secuencias\TBGrabacion\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[sMarca3]" />
+                        <inputColumn
+                          refId="Package\Contenedor de secuencias\TBGrabacion\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].Columns[sMarca4]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="64"
+                          cachedName="sMarca4"
+                          externalMetadataColumnId="Package\Contenedor de secuencias\TBGrabacion\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].ExternalColumns[sMarca4]"
+                          lineageId="Package\Contenedor de secuencias\TBGrabacion\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[sMarca4]" />
+                        <inputColumn
+                          refId="Package\Contenedor de secuencias\TBGrabacion\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].Columns[sMarca5]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="64"
+                          cachedName="sMarca5"
+                          externalMetadataColumnId="Package\Contenedor de secuencias\TBGrabacion\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].ExternalColumns[sMarca5]"
+                          lineageId="Package\Contenedor de secuencias\TBGrabacion\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[sMarca5]" />
+                        <inputColumn
+                          refId="Package\Contenedor de secuencias\TBGrabacion\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].Columns[sMarca6]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="64"
+                          cachedName="sMarca6"
+                          externalMetadataColumnId="Package\Contenedor de secuencias\TBGrabacion\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].ExternalColumns[sMarca6]"
+                          lineageId="Package\Contenedor de secuencias\TBGrabacion\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[sMarca6]" />
+                        <inputColumn
+                          refId="Package\Contenedor de secuencias\TBGrabacion\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].Columns[sMarca7]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="64"
+                          cachedName="sMarca7"
+                          externalMetadataColumnId="Package\Contenedor de secuencias\TBGrabacion\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].ExternalColumns[sMarca7]"
+                          lineageId="Package\Contenedor de secuencias\TBGrabacion\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[sMarca7]" />
+                        <inputColumn
+                          refId="Package\Contenedor de secuencias\TBGrabacion\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].Columns[sMarca8]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="64"
+                          cachedName="sMarca8"
+                          externalMetadataColumnId="Package\Contenedor de secuencias\TBGrabacion\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].ExternalColumns[sMarca8]"
+                          lineageId="Package\Contenedor de secuencias\TBGrabacion\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[sMarca8]" />
+                      </inputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Contenedor de secuencias\TBGrabacion\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].ExternalColumns[idGrabacion]"
+                          dataType="numeric"
+                          name="idGrabacion"
+                          precision="10" />
+                        <externalMetadataColumn
+                          refId="Package\Contenedor de secuencias\TBGrabacion\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].ExternalColumns[idGrabador]"
+                          dataType="numeric"
+                          name="idGrabador"
+                          precision="10" />
+                        <externalMetadataColumn
+                          refId="Package\Contenedor de secuencias\TBGrabacion\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].ExternalColumns[idContacto]"
+                          dataType="numeric"
+                          name="idContacto"
+                          precision="10" />
+                        <externalMetadataColumn
+                          refId="Package\Contenedor de secuencias\TBGrabacion\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].ExternalColumns[idTransaccion]"
+                          dataType="numeric"
+                          name="idTransaccion"
+                          precision="10" />
+                        <externalMetadataColumn
+                          refId="Package\Contenedor de secuencias\TBGrabacion\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].ExternalColumns[tInicio]"
+                          dataType="dbTimeStamp"
+                          name="tInicio" />
+                        <externalMetadataColumn
+                          refId="Package\Contenedor de secuencias\TBGrabacion\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].ExternalColumns[tFinal]"
+                          dataType="dbTimeStamp"
+                          name="tFinal" />
+                        <externalMetadataColumn
+                          refId="Package\Contenedor de secuencias\TBGrabacion\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].ExternalColumns[sExtension]"
+                          codePage="1252"
+                          dataType="str"
+                          length="20"
+                          name="sExtension" />
+                        <externalMetadataColumn
+                          refId="Package\Contenedor de secuencias\TBGrabacion\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].ExternalColumns[sFicheroVoz]"
+                          codePage="1252"
+                          dataType="str"
+                          length="256"
+                          name="sFicheroVoz" />
+                        <externalMetadataColumn
+                          refId="Package\Contenedor de secuencias\TBGrabacion\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].ExternalColumns[sMarca1]"
+                          codePage="1252"
+                          dataType="str"
+                          length="64"
+                          name="sMarca1" />
+                        <externalMetadataColumn
+                          refId="Package\Contenedor de secuencias\TBGrabacion\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].ExternalColumns[sMarca2]"
+                          codePage="1252"
+                          dataType="str"
+                          length="64"
+                          name="sMarca2" />
+                        <externalMetadataColumn
+                          refId="Package\Contenedor de secuencias\TBGrabacion\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].ExternalColumns[sMarca3]"
+                          codePage="1252"
+                          dataType="str"
+                          length="64"
+                          name="sMarca3" />
+                        <externalMetadataColumn
+                          refId="Package\Contenedor de secuencias\TBGrabacion\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].ExternalColumns[sMarca4]"
+                          codePage="1252"
+                          dataType="str"
+                          length="64"
+                          name="sMarca4" />
+                        <externalMetadataColumn
+                          refId="Package\Contenedor de secuencias\TBGrabacion\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].ExternalColumns[sMarca5]"
+                          codePage="1252"
+                          dataType="str"
+                          length="64"
+                          name="sMarca5" />
+                        <externalMetadataColumn
+                          refId="Package\Contenedor de secuencias\TBGrabacion\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].ExternalColumns[sMarca6]"
+                          codePage="1252"
+                          dataType="str"
+                          length="64"
+                          name="sMarca6" />
+                        <externalMetadataColumn
+                          refId="Package\Contenedor de secuencias\TBGrabacion\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].ExternalColumns[sMarca7]"
+                          codePage="1252"
+                          dataType="str"
+                          length="64"
+                          name="sMarca7" />
+                        <externalMetadataColumn
+                          refId="Package\Contenedor de secuencias\TBGrabacion\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].ExternalColumns[sMarca8]"
+                          codePage="1252"
+                          dataType="str"
+                          length="64"
+                          name="sMarca8" />
+                      </externalMetadataColumns>
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Contenedor de secuencias\TBGrabacion\Destino de OLE DB.Outputs[Salida de error de destino de OLE DB]"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="Salida de error de destino de OLE DB"
+                      synchronousInputId="Package\Contenedor de secuencias\TBGrabacion\Destino de OLE DB.Inputs[Entrada de destino de OLE DB]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Contenedor de secuencias\TBGrabacion\Destino de OLE DB.Outputs[Salida de error de destino de OLE DB].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Contenedor de secuencias\TBGrabacion\Destino de OLE DB.Outputs[Salida de error de destino de OLE DB].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Contenedor de secuencias\TBGrabacion\Destino de OLE DB.Outputs[Salida de error de destino de OLE DB].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Contenedor de secuencias\TBGrabacion\Destino de OLE DB.Outputs[Salida de error de destino de OLE DB].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Contenedor de secuencias\TBGrabacion\Origen de OLE DB"
+                  componentClassID="Microsoft.OLEDBSource"
+                  contactInfo="Origen de OLE DB;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos los derechos reservados; http://www.microsoft.com/sql/support;7"
+                  description="Origen de OLE DB"
+                  name="Origen de OLE DB"
+                  usesDispositions="true"
+                  version="7">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="Número de segundos antes de que se agote el tiempo de espera de un comando. Un valor de 0 indica un tiempo de espera infinito."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Especifica el nombre del objeto de base de datos usado para abrir un conjunto de filas."
+                      name="OpenRowset">[dbo].[tbGrabacion]</property>
+                    <property
+                      dataType="System.String"
+                      description="Especifica la variable que contiene el nombre del objeto de base de datos usado para abrir un conjunto de filas."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="Comando SQL para ejecutar."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT [idGrabacion]
+      ,[idGrabador]
+      ,[idContacto]
+      ,[idTransaccion]
+      ,[tInicio]
+      ,[tFinal]
+      ,[sExtension]
+      ,[sFicheroVoz]
+      ,[sMarca1]
+      ,[sMarca2]
+      ,[sMarca3]
+      ,[sMarca4]
+      ,[sMarca5]
+      ,[sMarca6]
+      ,[sMarca7]
+      ,[sMarca8]
+  FROM tbGrabacion  where [tInicio]  &gt; DATEADD(Month, -1, getdate())</property>
+                    <property
+                      dataType="System.String"
+                      description="Variable que contiene el comando SQL para ejecutar."
+                      name="SqlCommandVariable"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Especifica la página de códigos de columna para utilizar cuando la información de página de códigos no está disponible en el origen de datos."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Fuerza el uso del valor de la propiedad DefaultCodePage al describir datos de caracteres."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Especifica el modo utilizado para obtener acceso a la base de datos."
+                      name="AccessMode"
+                      typeConverter="AccessMode">2</property>
+                    <property
+                      dataType="System.String"
+                      description="Asignaciones entre los parámetros del comando SQL y las variables."
+                      name="ParameterMapping"></property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Contenedor de secuencias\TBGrabacion\Origen de OLE DB.Connections[OleDbConnection]"
+                      connectionManagerID="Package.ConnectionManagers[192.168.2.4.EVOLUTIONDB.etlautomation EVOLUTIONDB]"
+                      connectionManagerRefId="Package.ConnectionManagers[192.168.2.4.EVOLUTIONDB.etlautomation EVOLUTIONDB]"
+                      description="La conexión de tiempo de ejecución OLE DB usada para obtener acceso a la base de datos."
+                      name="OleDbConnection" />
+                  </connections>
+                  <outputs>
+                    <output
+                      refId="Package\Contenedor de secuencias\TBGrabacion\Origen de OLE DB.Outputs[Salida de origen de OLE DB]"
+                      name="Salida de origen de OLE DB">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Contenedor de secuencias\TBGrabacion\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[idGrabacion]"
+                          dataType="numeric"
+                          errorOrTruncationOperation="Conversión"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Contenedor de secuencias\TBGrabacion\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[idGrabacion]"
+                          lineageId="Package\Contenedor de secuencias\TBGrabacion\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[idGrabacion]"
+                          name="idGrabacion"
+                          precision="10"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Contenedor de secuencias\TBGrabacion\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[idGrabador]"
+                          dataType="numeric"
+                          errorOrTruncationOperation="Conversión"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Contenedor de secuencias\TBGrabacion\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[idGrabador]"
+                          lineageId="Package\Contenedor de secuencias\TBGrabacion\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[idGrabador]"
+                          name="idGrabador"
+                          precision="10"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Contenedor de secuencias\TBGrabacion\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[idContacto]"
+                          dataType="numeric"
+                          errorOrTruncationOperation="Conversión"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Contenedor de secuencias\TBGrabacion\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[idContacto]"
+                          lineageId="Package\Contenedor de secuencias\TBGrabacion\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[idContacto]"
+                          name="idContacto"
+                          precision="10"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Contenedor de secuencias\TBGrabacion\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[idTransaccion]"
+                          dataType="numeric"
+                          errorOrTruncationOperation="Conversión"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Contenedor de secuencias\TBGrabacion\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[idTransaccion]"
+                          lineageId="Package\Contenedor de secuencias\TBGrabacion\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[idTransaccion]"
+                          name="idTransaccion"
+                          precision="10"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Contenedor de secuencias\TBGrabacion\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[tInicio]"
+                          dataType="dbTimeStamp"
+                          errorOrTruncationOperation="Conversión"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Contenedor de secuencias\TBGrabacion\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[tInicio]"
+                          lineageId="Package\Contenedor de secuencias\TBGrabacion\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[tInicio]"
+                          name="tInicio"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Contenedor de secuencias\TBGrabacion\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[tFinal]"
+                          dataType="dbTimeStamp"
+                          errorOrTruncationOperation="Conversión"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Contenedor de secuencias\TBGrabacion\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[tFinal]"
+                          lineageId="Package\Contenedor de secuencias\TBGrabacion\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[tFinal]"
+                          name="tFinal"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Contenedor de secuencias\TBGrabacion\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[sExtension]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversión"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Contenedor de secuencias\TBGrabacion\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[sExtension]"
+                          length="20"
+                          lineageId="Package\Contenedor de secuencias\TBGrabacion\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[sExtension]"
+                          name="sExtension"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Contenedor de secuencias\TBGrabacion\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[sFicheroVoz]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversión"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Contenedor de secuencias\TBGrabacion\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[sFicheroVoz]"
+                          length="256"
+                          lineageId="Package\Contenedor de secuencias\TBGrabacion\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[sFicheroVoz]"
+                          name="sFicheroVoz"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Contenedor de secuencias\TBGrabacion\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[sMarca1]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversión"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Contenedor de secuencias\TBGrabacion\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[sMarca1]"
+                          length="64"
+                          lineageId="Package\Contenedor de secuencias\TBGrabacion\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[sMarca1]"
+                          name="sMarca1"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Contenedor de secuencias\TBGrabacion\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[sMarca2]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversión"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Contenedor de secuencias\TBGrabacion\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[sMarca2]"
+                          length="64"
+                          lineageId="Package\Contenedor de secuencias\TBGrabacion\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[sMarca2]"
+                          name="sMarca2"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Contenedor de secuencias\TBGrabacion\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[sMarca3]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversión"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Contenedor de secuencias\TBGrabacion\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[sMarca3]"
+                          length="64"
+                          lineageId="Package\Contenedor de secuencias\TBGrabacion\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[sMarca3]"
+                          name="sMarca3"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Contenedor de secuencias\TBGrabacion\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[sMarca4]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversión"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Contenedor de secuencias\TBGrabacion\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[sMarca4]"
+                          length="64"
+                          lineageId="Package\Contenedor de secuencias\TBGrabacion\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[sMarca4]"
+                          name="sMarca4"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Contenedor de secuencias\TBGrabacion\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[sMarca5]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversión"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Contenedor de secuencias\TBGrabacion\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[sMarca5]"
+                          length="64"
+                          lineageId="Package\Contenedor de secuencias\TBGrabacion\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[sMarca5]"
+                          name="sMarca5"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Contenedor de secuencias\TBGrabacion\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[sMarca6]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversión"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Contenedor de secuencias\TBGrabacion\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[sMarca6]"
+                          length="64"
+                          lineageId="Package\Contenedor de secuencias\TBGrabacion\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[sMarca6]"
+                          name="sMarca6"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Contenedor de secuencias\TBGrabacion\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[sMarca7]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversión"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Contenedor de secuencias\TBGrabacion\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[sMarca7]"
+                          length="64"
+                          lineageId="Package\Contenedor de secuencias\TBGrabacion\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[sMarca7]"
+                          name="sMarca7"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Contenedor de secuencias\TBGrabacion\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[sMarca8]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversión"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Contenedor de secuencias\TBGrabacion\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[sMarca8]"
+                          length="64"
+                          lineageId="Package\Contenedor de secuencias\TBGrabacion\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[sMarca8]"
+                          name="sMarca8"
+                          truncationRowDisposition="FailComponent" />
+                      </outputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Contenedor de secuencias\TBGrabacion\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[idGrabacion]"
+                          dataType="numeric"
+                          name="idGrabacion"
+                          precision="10" />
+                        <externalMetadataColumn
+                          refId="Package\Contenedor de secuencias\TBGrabacion\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[idGrabador]"
+                          dataType="numeric"
+                          name="idGrabador"
+                          precision="10" />
+                        <externalMetadataColumn
+                          refId="Package\Contenedor de secuencias\TBGrabacion\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[idContacto]"
+                          dataType="numeric"
+                          name="idContacto"
+                          precision="10" />
+                        <externalMetadataColumn
+                          refId="Package\Contenedor de secuencias\TBGrabacion\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[idTransaccion]"
+                          dataType="numeric"
+                          name="idTransaccion"
+                          precision="10" />
+                        <externalMetadataColumn
+                          refId="Package\Contenedor de secuencias\TBGrabacion\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[tInicio]"
+                          dataType="dbTimeStamp"
+                          name="tInicio" />
+                        <externalMetadataColumn
+                          refId="Package\Contenedor de secuencias\TBGrabacion\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[tFinal]"
+                          dataType="dbTimeStamp"
+                          name="tFinal" />
+                        <externalMetadataColumn
+                          refId="Package\Contenedor de secuencias\TBGrabacion\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[sExtension]"
+                          codePage="1252"
+                          dataType="str"
+                          length="20"
+                          name="sExtension" />
+                        <externalMetadataColumn
+                          refId="Package\Contenedor de secuencias\TBGrabacion\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[sFicheroVoz]"
+                          codePage="1252"
+                          dataType="str"
+                          length="256"
+                          name="sFicheroVoz" />
+                        <externalMetadataColumn
+                          refId="Package\Contenedor de secuencias\TBGrabacion\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[sMarca1]"
+                          codePage="1252"
+                          dataType="str"
+                          length="64"
+                          name="sMarca1" />
+                        <externalMetadataColumn
+                          refId="Package\Contenedor de secuencias\TBGrabacion\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[sMarca2]"
+                          codePage="1252"
+                          dataType="str"
+                          length="64"
+                          name="sMarca2" />
+                        <externalMetadataColumn
+                          refId="Package\Contenedor de secuencias\TBGrabacion\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[sMarca3]"
+                          codePage="1252"
+                          dataType="str"
+                          length="64"
+                          name="sMarca3" />
+                        <externalMetadataColumn
+                          refId="Package\Contenedor de secuencias\TBGrabacion\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[sMarca4]"
+                          codePage="1252"
+                          dataType="str"
+                          length="64"
+                          name="sMarca4" />
+                        <externalMetadataColumn
+                          refId="Package\Contenedor de secuencias\TBGrabacion\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[sMarca5]"
+                          codePage="1252"
+                          dataType="str"
+                          length="64"
+                          name="sMarca5" />
+                        <externalMetadataColumn
+                          refId="Package\Contenedor de secuencias\TBGrabacion\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[sMarca6]"
+                          codePage="1252"
+                          dataType="str"
+                          length="64"
+                          name="sMarca6" />
+                        <externalMetadataColumn
+                          refId="Package\Contenedor de secuencias\TBGrabacion\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[sMarca7]"
+                          codePage="1252"
+                          dataType="str"
+                          length="64"
+                          name="sMarca7" />
+                        <externalMetadataColumn
+                          refId="Package\Contenedor de secuencias\TBGrabacion\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[sMarca8]"
+                          codePage="1252"
+                          dataType="str"
+                          length="64"
+                          name="sMarca8" />
+                      </externalMetadataColumns>
+                    </output>
+                    <output
+                      refId="Package\Contenedor de secuencias\TBGrabacion\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB]"
+                      isErrorOut="true"
+                      name="Salida de error de origen de OLE DB">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Contenedor de secuencias\TBGrabacion\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[idGrabacion]"
+                          dataType="numeric"
+                          lineageId="Package\Contenedor de secuencias\TBGrabacion\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[idGrabacion]"
+                          name="idGrabacion"
+                          precision="10" />
+                        <outputColumn
+                          refId="Package\Contenedor de secuencias\TBGrabacion\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[idGrabador]"
+                          dataType="numeric"
+                          lineageId="Package\Contenedor de secuencias\TBGrabacion\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[idGrabador]"
+                          name="idGrabador"
+                          precision="10" />
+                        <outputColumn
+                          refId="Package\Contenedor de secuencias\TBGrabacion\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[idContacto]"
+                          dataType="numeric"
+                          lineageId="Package\Contenedor de secuencias\TBGrabacion\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[idContacto]"
+                          name="idContacto"
+                          precision="10" />
+                        <outputColumn
+                          refId="Package\Contenedor de secuencias\TBGrabacion\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[idTransaccion]"
+                          dataType="numeric"
+                          lineageId="Package\Contenedor de secuencias\TBGrabacion\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[idTransaccion]"
+                          name="idTransaccion"
+                          precision="10" />
+                        <outputColumn
+                          refId="Package\Contenedor de secuencias\TBGrabacion\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[tInicio]"
+                          dataType="dbTimeStamp"
+                          lineageId="Package\Contenedor de secuencias\TBGrabacion\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[tInicio]"
+                          name="tInicio" />
+                        <outputColumn
+                          refId="Package\Contenedor de secuencias\TBGrabacion\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[tFinal]"
+                          dataType="dbTimeStamp"
+                          lineageId="Package\Contenedor de secuencias\TBGrabacion\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[tFinal]"
+                          name="tFinal" />
+                        <outputColumn
+                          refId="Package\Contenedor de secuencias\TBGrabacion\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[sExtension]"
+                          codePage="1252"
+                          dataType="str"
+                          length="20"
+                          lineageId="Package\Contenedor de secuencias\TBGrabacion\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[sExtension]"
+                          name="sExtension" />
+                        <outputColumn
+                          refId="Package\Contenedor de secuencias\TBGrabacion\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[sFicheroVoz]"
+                          codePage="1252"
+                          dataType="str"
+                          length="256"
+                          lineageId="Package\Contenedor de secuencias\TBGrabacion\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[sFicheroVoz]"
+                          name="sFicheroVoz" />
+                        <outputColumn
+                          refId="Package\Contenedor de secuencias\TBGrabacion\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[sMarca1]"
+                          codePage="1252"
+                          dataType="str"
+                          length="64"
+                          lineageId="Package\Contenedor de secuencias\TBGrabacion\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[sMarca1]"
+                          name="sMarca1" />
+                        <outputColumn
+                          refId="Package\Contenedor de secuencias\TBGrabacion\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[sMarca2]"
+                          codePage="1252"
+                          dataType="str"
+                          length="64"
+                          lineageId="Package\Contenedor de secuencias\TBGrabacion\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[sMarca2]"
+                          name="sMarca2" />
+                        <outputColumn
+                          refId="Package\Contenedor de secuencias\TBGrabacion\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[sMarca3]"
+                          codePage="1252"
+                          dataType="str"
+                          length="64"
+                          lineageId="Package\Contenedor de secuencias\TBGrabacion\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[sMarca3]"
+                          name="sMarca3" />
+                        <outputColumn
+                          refId="Package\Contenedor de secuencias\TBGrabacion\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[sMarca4]"
+                          codePage="1252"
+                          dataType="str"
+                          length="64"
+                          lineageId="Package\Contenedor de secuencias\TBGrabacion\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[sMarca4]"
+                          name="sMarca4" />
+                        <outputColumn
+                          refId="Package\Contenedor de secuencias\TBGrabacion\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[sMarca5]"
+                          codePage="1252"
+                          dataType="str"
+                          length="64"
+                          lineageId="Package\Contenedor de secuencias\TBGrabacion\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[sMarca5]"
+                          name="sMarca5" />
+                        <outputColumn
+                          refId="Package\Contenedor de secuencias\TBGrabacion\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[sMarca6]"
+                          codePage="1252"
+                          dataType="str"
+                          length="64"
+                          lineageId="Package\Contenedor de secuencias\TBGrabacion\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[sMarca6]"
+                          name="sMarca6" />
+                        <outputColumn
+                          refId="Package\Contenedor de secuencias\TBGrabacion\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[sMarca7]"
+                          codePage="1252"
+                          dataType="str"
+                          length="64"
+                          lineageId="Package\Contenedor de secuencias\TBGrabacion\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[sMarca7]"
+                          name="sMarca7" />
+                        <outputColumn
+                          refId="Package\Contenedor de secuencias\TBGrabacion\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[sMarca8]"
+                          codePage="1252"
+                          dataType="str"
+                          length="64"
+                          lineageId="Package\Contenedor de secuencias\TBGrabacion\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[sMarca8]"
+                          name="sMarca8" />
+                        <outputColumn
+                          refId="Package\Contenedor de secuencias\TBGrabacion\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Contenedor de secuencias\TBGrabacion\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Contenedor de secuencias\TBGrabacion\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Contenedor de secuencias\TBGrabacion\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+              </components>
+              <paths>
+                <path
+                  refId="Package\Contenedor de secuencias\TBGrabacion.Paths[Salida de entradas no coincidentes de búsqueda]"
+                  endId="Package\Contenedor de secuencias\TBGrabacion\Destino de OLE DB.Inputs[Entrada de destino de OLE DB]"
+                  name="Salida de entradas no coincidentes de búsqueda"
+                  startId="Package\Contenedor de secuencias\TBGrabacion\Búsqueda.Outputs[Salida de entradas no coincidentes de búsqueda]" />
+                <path
+                  refId="Package\Contenedor de secuencias\TBGrabacion.Paths[Salida de origen de OLE DB]"
+                  endId="Package\Contenedor de secuencias\TBGrabacion\Búsqueda.Inputs[Entrada de búsqueda]"
+                  name="Salida de origen de OLE DB"
+                  startId="Package\Contenedor de secuencias\TBGrabacion\Origen de OLE DB.Outputs[Salida de origen de OLE DB]" />
+              </paths>
+            </pipeline>
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--Esta sección CDATA contiene la información de diseño del paquete. Esta sección incluye información como, por ejemplo, las coordenadas (x,y), el ancho y el alto.-->
+<!--Si edita manualmente esta sección y comete un error, puede eliminarlo. -->
+<!--El paquete podrá cargarse normalmente, pero se perderá la información de diseño anterior y el diseñador reorganizará los elementos automáticamente en la superficie de diseño.-->
+<Objects
+  Version="8">
+  <!--Cada uno de los nodos siguientes contiene propiedades que no afectan al comportamiento en tiempo de ejecución.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="130.4,41.6"
+          Id="Package\Contenedor de secuencias\TBGrabacion"
+          TopLeft="71.9999999999999,48" />
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="467.2,311.2"
+          Size="467.2,354.4"
+          Id="Package\Contenedor de secuencias"
+          TopLeft="168.8,40.0000000000001" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Contenedor de secuencias\TBGrabacion">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="151.2,41.6"
+          Id="Package\Contenedor de secuencias\TBGrabacion\Origen de OLE DB"
+          TopLeft="246.4,98.4" />
+        <NodeLayout
+          Size="118.4,41.6"
+          Id="Package\Contenedor de secuencias\TBGrabacion\Búsqueda"
+          TopLeft="263.2,205.6" />
+        <EdgeLayout
+          Id="Package\Contenedor de secuencias\TBGrabacion.Paths[Salida de origen de OLE DB]"
+          TopLeft="322.2,140">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,65.6"
+              Start="0,0"
+              End="0,58.1">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,58.1" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-35.77349609375,24.14375,71.5469921875,9.8125"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="155.2,41.6"
+          Id="Package\Contenedor de secuencias\TBGrabacion\Destino de OLE DB"
+          TopLeft="261.6,316.8" />
+        <EdgeLayout
+          Id="Package\Contenedor de secuencias\TBGrabacion.Paths[Salida de entradas no coincidentes de búsqueda]"
+          TopLeft="322.4,247.2">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="16.7999999999999,69.6000000000001"
+              Start="0,0"
+              End="16.7999999999999,62.1000000000001">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,30.8" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,30.8"
+                    Point2="0,34.8"
+                    Point3="4,34.8" />
+                  <mssgle:LineSegment
+                    End="12.7999999999999,34.8" />
+                  <mssgle:CubicBezierSegment
+                    Point1="12.7999999999999,34.8"
+                    Point2="16.7999999999999,34.8"
+                    Point3="16.7999999999999,38.8" />
+                  <mssgle:LineSegment
+                    End="16.7999999999999,62.1000000000001" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-126.66740234375,39.8,270.1348046875,12.1953125"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Contenedor de secuencias\TBGrabacion\Origen de OLE DB">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Contenedor de secuencias\TBGrabacion\Búsqueda">
+    <Properties>
+      <Property>
+        <Name>OverwriteParamsSQLProp</Name>
+        <Value
+          type="q2:boolean">false</Value>
+      </Property>
+      <Property>
+        <Name>UsedTableName</Name>
+        <Value
+          type="q3:string"></Value>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q4:int">0</Value>
+      </Property>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Contenedor de secuencias\TBGrabacion\Destino de OLE DB">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

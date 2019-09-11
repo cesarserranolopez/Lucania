@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27703.2047
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{159641D6-6404-4A2A-AE62-294DE0FE8301}") = "ReplicaMarcadorReporting", "ReplicaMarcadorReporting.dtproj", "{33280445-8CB6-4742-A942-D5D676AD1C4F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Development|Default = Development|Default
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{33280445-8CB6-4742-A942-D5D676AD1C4F}.Development|Default.ActiveCfg = Development
+		{33280445-8CB6-4742-A942-D5D676AD1C4F}.Development|Default.Build.0 = Development
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {9A1FDA59-8C69-4323-B52C-96BD978C6323}
+	EndGlobalSection
+EndGlobal
