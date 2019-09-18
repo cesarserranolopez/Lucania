@@ -5,11 +5,13 @@ VisualStudioVersion = 15.0.28307.136
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{159641D6-6404-4A2A-AE62-294DE0FE8301}") = "ReplicaReporting", "ReplicaReporting\ReplicaReporting.dtproj", "{18F4082D-496F-4317-82A2-FC4715643241}"
 EndProject
-Project("{159641D6-6404-4A2A-AE62-294DE0FE8301}") = "OCR", "OCR\OCR.dtproj", "{888D60AD-F64D-421A-A379-FD581B597B8F}"
+Project("{159641D6-6404-4A2A-AE62-294DE0FE8301}") = "OCR_UAT", "OCR\OCR_UAT.dtproj", "{888D60AD-F64D-421A-A379-FD581B597B8F}"
 EndProject
 Project("{159641D6-6404-4A2A-AE62-294DE0FE8301}") = "DWGroup", "DWGroup\DWGroup.dtproj", "{63BD4A18-A3A6-4B0E-9B3F-F70F9F20C61F}"
 EndProject
 Project("{159641D6-6404-4A2A-AE62-294DE0FE8301}") = "Backup", "Backup\Backup.dtproj", "{8DB2477A-DE89-412E-9FDD-C84D7BAEAC3C}"
+EndProject
+Project("{159641D6-6404-4A2A-AE62-294DE0FE8301}") = "OCR_PROD", "OCR_PROD\OCR_PROD.dtproj", "{C435CE5B-101D-4715-851C-313666D2D09D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -24,6 +26,8 @@ Global
 		{63BD4A18-A3A6-4B0E-9B3F-F70F9F20C61F}.Development|Default.Build.0 = Development
 		{8DB2477A-DE89-412E-9FDD-C84D7BAEAC3C}.Development|Default.ActiveCfg = Development
 		{8DB2477A-DE89-412E-9FDD-C84D7BAEAC3C}.Development|Default.Build.0 = Development
+		{C435CE5B-101D-4715-851C-313666D2D09D}.Development|Default.ActiveCfg = Development
+		{C435CE5B-101D-4715-851C-313666D2D09D}.Development|Default.Build.0 = Development
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
